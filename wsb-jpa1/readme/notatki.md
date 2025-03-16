@@ -1,0 +1,2 @@
+﻿1. Jeśli WsbJpaApplicaiton nie ma opcji "Run" to najpewniej nie ten folder jest rootem. Rootem powinien być folder wsb-jpa1 i powinien wystąpić tylo raz w hierarchi. 
+2. Patrzeć w logi, jeśli baza nie wstaje to w logach powinien pojawić się plik w folderze użytkownika - usunąć go.
