@@ -7,6 +7,10 @@ import jakarta.persistence.*;
 @Table(name = "ADDRESS")
 public class AddressEntity {
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PATIENT_ID")
+	private PatientEntity patientEntity;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
