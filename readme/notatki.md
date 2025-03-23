@@ -5,3 +5,7 @@
 Projekt
 1. W data.sql same inserty, by dodać dane do bazy.
 2. Zawrzec różne relacje, jeden do wielu, wielu do jeden.
+
+Do zrobienia:
+Lab1.md
+- kaskady po stronie Maćka pomiędzy doctor, patient a adres

@@ -12,10 +12,18 @@ public class VisitEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String description;
 
 	@Column(nullable = false)
 	private LocalDateTime time;
+
+	@Column(nullable = false)
+	private Long doctorId;
+
+	@ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "doctorId", referencedColumnName = "id")
+	private DoctorEntity doctor;
 
 	public Long getId() {
 		return id;

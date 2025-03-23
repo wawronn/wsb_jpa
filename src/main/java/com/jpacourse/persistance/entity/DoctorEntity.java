@@ -3,6 +3,7 @@ package com.jpacourse.persistance.entity;
 import com.jpacourse.persistance.enums.Specialization;
 
 import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -29,6 +30,9 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "DoctorEntity" )
+	private Collection<VisitEntity> visits;
 
 	public Long getId() {
 		return id;
