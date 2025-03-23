@@ -12,17 +12,14 @@ public class VisitEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "description", nullable = false)
 	private String description;
 
-	@Column(nullable = false)
+	@Column(name = "time", nullable = false)
 	private LocalDateTime time;
 
-	@Column(nullable = false)
-	private Long doctorId;
-
-	@ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "doctorId", referencedColumnName = "id")
+	@ManyToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
 	private DoctorEntity doctor;
 
 	public Long getId() {
@@ -49,4 +46,11 @@ public class VisitEntity {
 		this.time = time;
 	}
 
+	public DoctorEntity getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(DoctorEntity doctor) {
+		this.doctor = doctor;
+	}
 }

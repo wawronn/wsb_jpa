@@ -13,26 +13,27 @@ public class DoctorEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@Column(nullable = false)
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
+	@Column(name = "telephone_number", nullable = false)
 	private String telephoneNumber;
 
+	@Column(name = "email")
 	private String email;
 
-	@Column(nullable = false)
+	@Column(name = "doctor_number", nullable = false)
 	private String doctorNumber;
 
-	@Column(nullable = false)
+	@Column(name = "specialization", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "DoctorEntity" )
-	private Collection<VisitEntity> visits;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", cascade = CascadeType.REMOVE, orphanRemoval = true )
+	private Collection<VisitEntity> visits = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -88,6 +89,14 @@ public class DoctorEntity {
 
 	public void setSpecialization(Specialization specialization) {
 		this.specialization = specialization;
+	}
+
+	public Collection<VisitEntity> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Collection<VisitEntity> visits) {
+		this.visits = visits;
 	}
 
 }
