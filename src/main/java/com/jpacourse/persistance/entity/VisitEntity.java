@@ -1,6 +1,7 @@
 package com.jpacourse.persistance.entity;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 import jakarta.persistence.*;
 
@@ -21,6 +22,9 @@ public class VisitEntity {
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
 	private DoctorEntity doctor;
+
+	@OneToMany( mappedBy = "visit", fetch = FetchType.LAZY )
+	private Collection<MedicalTreatmentEntity> treatments = new ArrayList<>();
 
 	public Long getId() {
 		return id;
