@@ -13,17 +13,19 @@ public class VisitEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "description", nullable = false)
+	@Column(nullable = false)
 	private String description;
 
-	@Column(name = "time", nullable = false)
+	@Column(nullable = false)
 	private LocalDateTime time;
 
+	// relacja jednostronna od strony dziecka
 	@ManyToOne( fetch = FetchType.LAZY)
-	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
+	@JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
 	private DoctorEntity doctor;
 
-	@OneToMany( mappedBy = "visit", fetch = FetchType.LAZY )
+	// relacja jednostronna od strony dziecka
+	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY )
 	private Collection<MedicalTreatmentEntity> treatments = new ArrayList<>();
 
 	public Long getId() {
@@ -56,5 +58,17 @@ public class VisitEntity {
 
 	public void setDoctor(DoctorEntity doctor) {
 		this.doctor = doctor;
+	}
+
+	public void setTreatments(Collection<MedicalTreatmentEntity> treatments) {
+		this.treatments = treatments;
+	}
+
+	public void addTreatment(MedicalTreatmentEntity treatment) {
+		treatments.add(treatment);
+	}
+
+	public void removeTreatment(MedicalTreatmentEntity treatment) {
+		treatments.remove(treatment);
 	}
 }

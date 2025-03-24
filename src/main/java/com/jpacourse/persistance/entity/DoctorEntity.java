@@ -13,26 +13,27 @@ public class DoctorEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "first_name", nullable = false)
+	@Column(nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name", nullable = false)
+	@Column(nullable = false)
 	private String lastName;
 
-	@Column(name = "telephone_number", nullable = false)
+	@Column(nullable = false)
 	private String telephoneNumber;
 
-	@Column(name = "email")
+	@Column
 	private String email;
 
-	@Column(name = "doctor_number", nullable = false)
+	@Column(nullable = false)
 	private String doctorNumber;
 
-	@Column(name = "specialization", nullable = false)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", cascade = CascadeType.REMOVE, orphanRemoval = true )
+	// relacja jednostronna od strony rodzica
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", orphanRemoval = true)
 	private Collection<VisitEntity> visits = new ArrayList<>();
 
 	public Long getId() {
@@ -97,6 +98,10 @@ public class DoctorEntity {
 
 	public void setVisits(Collection<VisitEntity> visits) {
 		this.visits = visits;
+	}
+
+	public void deleteVisit(VisitEntity visit) {
+		this.visits.remove(visit);
 	}
 
 }
