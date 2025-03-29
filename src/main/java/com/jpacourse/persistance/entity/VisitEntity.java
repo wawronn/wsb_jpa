@@ -21,10 +21,15 @@ public class VisitEntity {
 
 	// relacja jednostronna od strony dziecka
 	@ManyToOne( fetch = FetchType.LAZY)
-	@JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = true)
 	private DoctorEntity doctor;
 
 	// relacja jednostronna od strony dziecka
+	@ManyToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = true)
+	private PatientEntity patient;
+
+	// relacja jednostronna od strony rodzica
 	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY )
 	private Collection<MedicalTreatmentEntity> treatments = new ArrayList<>();
 
@@ -71,4 +76,8 @@ public class VisitEntity {
 	public void removeTreatment(MedicalTreatmentEntity treatment) {
 		treatments.remove(treatment);
 	}
+
+	public PatientEntity getPatient(PatientEntity patient) { return patient; }
+
+	public void setPatient(PatientEntity patient) { this.patient = patient; }
 }

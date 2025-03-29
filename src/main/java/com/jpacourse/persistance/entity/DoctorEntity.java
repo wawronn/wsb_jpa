@@ -36,6 +36,11 @@ public class DoctorEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", orphanRemoval = true)
 	private Collection<VisitEntity> visits = new ArrayList<>();
 
+	// Relacja jednostronna od strony rodzica (DoctorEntity - One to One)
+	@OneToOne
+	@JoinColumn(name = "address_id") // Tutaj mapujemy adres do lekarza
+	private AddressEntity address;
+
 	public Long getId() {
 		return id;
 	}
@@ -102,6 +107,14 @@ public class DoctorEntity {
 
 	public void deleteVisit(VisitEntity visit) {
 		this.visits.remove(visit);
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
 	}
 
 }
