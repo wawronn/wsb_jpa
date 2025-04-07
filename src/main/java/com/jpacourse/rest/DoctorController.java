@@ -1,7 +1,6 @@
 package com.jpacourse.rest;
 
 import com.jpacourse.dto.DoctorTO;
-import com.jpacourse.rest.exception.EntityNotFoundException;
 import com.jpacourse.service.DoctorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
