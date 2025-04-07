@@ -1,44 +1,35 @@
 package com.jpacourse.persistance.entity;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "PATIENT")
+@Table(name = "patient")
 public class PatientEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
 	private String firstName;
-
-	@Column(nullable = false)
 	private String lastName;
-
-	@Column(nullable = false)
 	private String telephoneNumber;
-
 	private String email;
-
-	@Column(nullable = false)
 	private String patientNumber;
 
-	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
-	// relacja jednostronna od strony rodzica
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", orphanRemoval = true)
-	private Collection<VisitEntity> visits = new ArrayList<>();
+	@Column(nullable = false)
+	private Boolean insured = false; // <- NOWE POLE
 
-	// Relacja jednostronna od strony rodzica (PatientEntity - One to One)
-	@OneToOne
-	@JoinColumn(name = "address_id") // Tutaj mapujemy adres do lekarza
+	@ManyToOne
+	@JoinColumn(name = "ADDRESS_ID")
 	private AddressEntity address;
+
+	@OneToMany(mappedBy = "patient")
+	private List<VisitEntity> visits;
+
+	// GETTERY I SETTERY
 
 	public Long getId() {
 		return id;
@@ -96,16 +87,12 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Collection<VisitEntity> getVisits() {
-		return visits;
+	public Boolean getInsured() {
+		return insured;
 	}
 
-	public void setVisits(Collection<VisitEntity> visits) {
-		this.visits = visits;
-	}
-
-	public void deleteVisit(VisitEntity visit) {
-		this.visits.remove(visit);
+	public void setInsured(Boolean insured) {
+		this.insured = insured;
 	}
 
 	public AddressEntity getAddress() {
@@ -116,4 +103,11 @@ public class PatientEntity {
 		this.address = address;
 	}
 
+	public List<VisitEntity> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List<VisitEntity> visits) {
+		this.visits = visits;
+	}
 }
