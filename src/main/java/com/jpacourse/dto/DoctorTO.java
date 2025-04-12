@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Collection;
+import com.jpacourse.persistance.entity.VisitEntity;
+import com.jpacourse.persistance.enums.Specialization;
+import jakarta.persistence.*;
 
 public class DoctorTO implements Serializable {
 
