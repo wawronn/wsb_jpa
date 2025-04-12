@@ -1,35 +1,44 @@
 package com.jpacourse.persistance.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "patient")
+@Table(name = "PATIENT")
 public class PatientEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String firstName;
-	private String lastName;
-	private String telephoneNumber;
-	private String email;
-	private String patientNumber;
-
-	private LocalDate dateOfBirth;
 
 	@Column(nullable = false)
-	private Boolean insured = false; // <- NOWE POLE
+	private String lastName;
 
-	@ManyToOne
-	@JoinColumn(name = "ADDRESS_ID")
+	@Column(nullable = false)
+	private String telephoneNumber;
+
+	private String email;
+
+	@Column(nullable = false)
+	private String patientNumber;
+
+	@Column(nullable = false)
+	private LocalDate dateOfBirth;
+
+	// relacja jednostronna od strony rodzica
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", orphanRemoval = true)
+	private Collection<VisitEntity> visits = new ArrayList<>();
+
+	// Relacja jednostronna od strony rodzica (PatientEntity - One to One)
+	@OneToOne
+	@JoinColumn(name = "address_id") // Tutaj mapujemy adres do lekarza
 	private AddressEntity address;
-
-	@OneToMany(mappedBy = "patient")
-	private List<VisitEntity> visits;
-
-	// GETTERY I SETTERY
 
 	public Long getId() {
 		return id;
@@ -87,12 +96,16 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Boolean getInsured() {
-		return insured;
+	public Collection<VisitEntity> getVisits() {
+		return visits;
 	}
 
-	public void setInsured(Boolean insured) {
-		this.insured = insured;
+	public void setVisits(Collection<VisitEntity> visits) {
+		this.visits = visits;
+	}
+
+	public void deleteVisit(VisitEntity visit) {
+		this.visits.remove(visit);
 	}
 
 	public AddressEntity getAddress() {
@@ -103,11 +116,4 @@ public class PatientEntity {
 		this.address = address;
 	}
 
-	public List<VisitEntity> getVisits() {
-		return visits;
-	}
-
-	public void setVisits(List<VisitEntity> visits) {
-		this.visits = visits;
-	}
 }
