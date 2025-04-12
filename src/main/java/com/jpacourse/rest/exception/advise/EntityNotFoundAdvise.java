@@ -1,5 +1,6 @@
 package com.jpacourse.rest.exception.advise;
 
+import com.jpacourse.rest.exception.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

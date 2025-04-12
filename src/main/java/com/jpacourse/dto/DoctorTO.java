@@ -1,5 +1,9 @@
 package com.jpacourse.dto;
 
+import com.jpacourse.persistance.entity.VisitEntity;
+import com.jpacourse.persistance.enums.Specialization;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Collection;
 

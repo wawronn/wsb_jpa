@@ -1,6 +1,7 @@
 package com.jpacourse.mapper;
 
 import com.jpacourse.dto.DoctorTO;
+import com.jpacourse.persistance.entity.DoctorEntity;
 
 public final class DoctorMapper {
 

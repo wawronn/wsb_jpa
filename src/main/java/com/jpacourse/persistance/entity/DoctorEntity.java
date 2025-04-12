@@ -1,5 +1,7 @@
 package com.jpacourse.persistance.entity;
 
+import com.jpacourse.persistance.enums.Specialization;
+
 import jakarta.persistence.*;
 import java.util.*;
 

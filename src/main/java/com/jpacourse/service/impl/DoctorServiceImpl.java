@@ -3,6 +3,7 @@ package com.jpacourse.service.impl;
 import com.jpacourse.dto.DoctorTO;
 import com.jpacourse.mapper.DoctorMapper;
 import com.jpacourse.persistance.dao.DoctorDao;
+import com.jpacourse.persistance.entity.DoctorEntity;
 import com.jpacourse.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
