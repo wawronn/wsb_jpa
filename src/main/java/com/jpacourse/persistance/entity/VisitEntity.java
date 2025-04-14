@@ -13,7 +13,7 @@ public class VisitEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String description;
 
 	@Column(nullable = false)
@@ -30,7 +30,7 @@ public class VisitEntity {
 	private PatientEntity patient;
 
 	// relacja jednostronna od strony rodzica
-	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER )
+	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Collection<MedicalTreatmentEntity> treatments = new ArrayList<>();
 
 	public Long getId() {
@@ -75,9 +75,10 @@ public class VisitEntity {
 
 	public void removeTreatment(MedicalTreatmentEntity treatment) {
 		treatments.remove(treatment);
+		treatment.setVisit(null);
 	}
 
-	public PatientEntity getPatient(PatientEntity patient) { return patient; }
+	public PatientEntity getPatient() { return patient; }
 
 	public void setPatient(PatientEntity patient) { this.patient = patient; }
 

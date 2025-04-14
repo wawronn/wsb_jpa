@@ -20,7 +20,7 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String telephoneNumber;
 
 	private String email;
@@ -28,7 +28,7 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String patientNumber;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private LocalDate dateOfBirth;
 
 	// relacja jednostronna od strony rodzica
@@ -104,15 +104,20 @@ public class PatientEntity {
 		this.visits = visits;
 	}
 
+	public void addVisit(VisitEntity visit) {
+		this.visits.add(visit);
+	}
+
 	public void deleteVisit(VisitEntity visit) {
 		this.visits.remove(visit);
+		visit.setPatient(null);
 	}
 
 	public AddressEntity getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress() {
 		this.address = address;
 	}
 
