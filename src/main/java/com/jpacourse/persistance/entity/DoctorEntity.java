@@ -19,13 +19,13 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String telephoneNumber;
 
 	@Column
 	private String email;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String doctorNumber;
 
 	@Column(nullable = false)
@@ -107,6 +107,10 @@ public class DoctorEntity {
 
 	public void deleteVisit(VisitEntity visit) {
 		this.visits.remove(visit);
+	}
+
+	public void addVisit(VisitEntity visit) {
+		this.visits.add(visit);
 	}
 
 	public AddressEntity getAddress() {

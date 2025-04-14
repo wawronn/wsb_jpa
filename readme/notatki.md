@@ -9,3 +9,7 @@ Projekt
 Do zrobienia:
 Lab1.md
 - kaskady po stronie Maćka pomiędzy doctor, patient a adres
+
+Lab2
+    Pamiętać żeby nie zwracać encji a TO
+    Dane zwracane w przypadku pacjenta będą mieć zagnieżdżoną strukturę

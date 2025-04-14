@@ -20,7 +20,7 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String telephoneNumber;
 
 	private String email;
@@ -28,11 +28,11 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String patientNumber;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private LocalDate dateOfBirth;
 
 	// relacja jednostronna od strony rodzica
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "patient", orphanRemoval = true)
 	private Collection<VisitEntity> visits = new ArrayList<>();
 
 	// Relacja jednostronna od strony rodzica (PatientEntity - One to One)
@@ -104,15 +104,20 @@ public class PatientEntity {
 		this.visits = visits;
 	}
 
+	public void addVisit(VisitEntity visit) {
+		this.visits.add(visit);
+	}
+
 	public void deleteVisit(VisitEntity visit) {
 		this.visits.remove(visit);
+		visit.setPatient(null);
 	}
 
 	public AddressEntity getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress() {
 		this.address = address;
 	}
 
