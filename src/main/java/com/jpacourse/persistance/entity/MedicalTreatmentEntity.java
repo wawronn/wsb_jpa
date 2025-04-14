@@ -19,7 +19,7 @@ public class MedicalTreatmentEntity {
 	private TreatmentType type;
 
 	// relacja jednostronna od strony dziecka
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "visit_id")
 	private VisitEntity visit;
 

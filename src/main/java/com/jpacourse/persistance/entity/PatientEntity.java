@@ -32,7 +32,7 @@ public class PatientEntity {
 	private LocalDate dateOfBirth;
 
 	// relacja jednostronna od strony rodzica
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "patient", orphanRemoval = true)
 	private Collection<VisitEntity> visits = new ArrayList<>();
 
 	// Relacja jednostronna od strony rodzica (PatientEntity - One to One)

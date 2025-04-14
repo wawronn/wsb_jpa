@@ -30,7 +30,7 @@ public class VisitEntity {
 	private PatientEntity patient;
 
 	// relacja jednostronna od strony rodzica
-	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY )
+	@OneToMany( mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER )
 	private Collection<MedicalTreatmentEntity> treatments = new ArrayList<>();
 
 	public Long getId() {
