@@ -7,6 +7,7 @@ import com.jpacourse.persistance.entity.VisitEntity;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements PatientDao {
@@ -31,5 +32,12 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
         doctor.addVisit(visit);
 
         entityManager.merge(patient);
+    }
+
+    @Override
+    public List<PatientEntity> getPatientsByLastName(String lastName) {
+        return entityManager.createQuery(" select patient from PatientEntity patient " +
+                " where patient.lastName = :param1 ", PatientEntity.class)
+                .setParameter("param1", lastName).getResultList();
     }
 }

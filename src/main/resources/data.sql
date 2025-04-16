@@ -1,6 +1,9 @@
 insert into address (ID, ADDRESS_LINE1, ADDRESS_LINE2, CITY, POSTAL_CODE)
             values  (101,'Wilczkow 34','','Sroda Slaska','55-300'),
-                    (102,'Wroclaw','Akacjowa 12/3','Wroclaw','53-133');
+                    (102,'Wroclaw','Akacjowa 12/3','Wroclaw','53-133'),
+                    (103,'Lutynia','Akacjowa 12/3','Wroclaw','53-133'),
+                    (104,'Miekinia','Akacjowa 12/3','Wroclaw','53-133'),
+                    (105,'Gdynia','Akacjowa 12/3','Wroclaw','53-133');
 
 insert into patient (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, PATIENT_NUMBER, DATE_OF_BIRTH, ADDRESS_ID)
             values (201,
@@ -10,7 +13,34 @@ insert into patient (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, PATIENT
                     'maciej.kowalski@wp.pl',
                     'P201',
                     '1990-07-01',
-                    101);
+                    101),
+
+                    (202,
+                    'Igor',
+                    'Nowak',
+                    '223133123',
+                    'Igor.Nowak@wp.pl',
+                    'P201',
+                    '1994-09-03',
+                    102),
+
+                    (203,
+                    'Adam',
+                    'Drewniany',
+                    '333123123',
+                    'Adam.Drewniany@wp.pl',
+                    'P201',
+                    '1991-02-21',
+                    103),
+
+                    (204,
+                        'Marian',
+                        'Kowalski',
+                        '923103123',
+                        'Marian.kowalski@wp.pl',
+                        'P201',
+                        '1999-11-01',
+                        104);
 
 insert into doctor (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, DOCTOR_NUMBER, SPECIALIZATION, ADDRESS_ID)
             values (301,'Jan',
