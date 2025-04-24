@@ -56,7 +56,9 @@ insert into visit (ID, DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID)
                     ( 402,'Oparzenie',            '2025-07-01T10:15:00',  301,    201),
                     ( 403,'Złamana szczęka',      '2025-03-01T10:15:00',  301,    201),
                     ( 404,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    201),
-                    ( 405,'Skręt kiszki (lewy)',  '2025-03-028T15:45:00', 301,    201);
+                    ( 405,'Skręt kiszki (lewy)',  '2025-03-028T15:45:00', 301,    201),
+                    ( 406,'Złamana szczęka',      '2025-03-01T10:15:00',  301,    203),
+                    ( 407,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    203);
 
 insert into medical_treatment(ID, DESCRIPTION, TYPE, VISIT_ID)
             values  (501, 'Badanie USG przed amputacja',          'USG',  401),
