@@ -51,6 +51,12 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
 
     @Override
     public List<PatientEntity> getPatientsByVisitCount(Integer numberOfVisits) {
+        return  entityManager.createQuery(
+                " select patient from PatientEntity patient " +
+                        " where size(patient.visits) > :param1 ", PatientEntity.class)
+                    .setParameter("param1", numberOfVisits)
+                    .getResultList();
+        /*
         return entityManager.createQuery(
                 " select patient from PatientEntity patient " +
                     " join patient.visits visit " +
@@ -58,6 +64,8 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
                     " having count(visit) > :param1 ", PatientEntity.class)
                 .setParameter("param1", numberOfVisits)
                 .getResultList();
+
+         */
     }
 
     @Override

@@ -5,9 +5,12 @@ import com.jpacourse.persistance.entity.VisitEntity;
 import com.jpacourse.service.PatientService;
 import com.jpacourse.service.PatientServiceTest;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,9 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class patientQueryTest {
 
+    private EntityManager entityManager;
+
     @Autowired
     private PatientDao patientDao;
-    
+    @Autowired
+    private LocalContainerEntityManagerFactoryBean entityManagerFactory2;
+
     @Test
     public void shouldFindByLastName() {
 
@@ -46,7 +53,14 @@ public class patientQueryTest {
     void shouldReturnPatientsByVisitsCount() {
         Integer visitCount = 2;
         List<PatientEntity> patients = patientDao.getPatientsByVisitCount(visitCount);
-        assertEquals(1, patients.size());
+        assertEquals(3, patients.size());
+    }
+
+    @Test
+    void shouldReturnPatientWithMultipleVisits() {
+        Long patientId = 201L;
+        PatientEntity patient = patientDao.findOne(patientId);
+        assert(patient.getVisits().size() > 1);
     }
 
     @Test

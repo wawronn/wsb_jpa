@@ -3,7 +3,8 @@ insert into address (ID, ADDRESS_LINE1, ADDRESS_LINE2, CITY, POSTAL_CODE)
                     (102,'Wroclaw','Akacjowa 12/3','Wroclaw','53-133'),
                     (103,'Lutynia','Akacjowa 12/3','Wroclaw','53-133'),
                     (104,'Miekinia','Akacjowa 12/3','Wroclaw','53-133'),
-                    (105,'Gdynia','Akacjowa 12/3','Wroclaw','53-133');
+                    (105,'Gdynia','Akacjowa 12/3','Wroclaw','53-133'),
+                    (106,'Sopot','Molo 15','Sopot','51-132');
 
 insert into patient (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, PATIENT_NUMBER, DATE_OF_BIRTH, ADDRESS_ID)
             values (201,
@@ -49,7 +50,16 @@ insert into doctor (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, DOCTOR_N
                     'jan.nowak@przychodnia.pl',
                     '90101',
                     'SURGEON',
-                    102);
+                    106);
+
+insert into doctor (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, DOCTOR_NUMBER, SPECIALIZATION, ADDRESS_ID)
+    values (302,'Mariusz',
+            'Brzechwa',
+            '500600101',
+            'mario.brzecha@przychodnia.pl',
+            '90102',
+            'SURGEON',
+            102);
 
 insert into visit (ID, DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID)
             values  (401, 'Amputacja',            '2025-07-01T09:00:00',  301,    201),
@@ -58,9 +68,12 @@ insert into visit (ID, DESCRIPTION, TIME, DOCTOR_ID, PATIENT_ID)
                     ( 404,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    201),
                     ( 405,'Skręt kiszki (lewy)',  '2025-03-028T15:45:00', 301,    201),
                     ( 406,'Złamana szczęka',      '2025-03-01T10:15:00',  301,    203),
-                    ( 407,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    203),
+                    ( 407,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    202),
                     ( 408,'Kontuzja nadgarstka',  '2025-04-028T15:45:00', 301,    202),
-                    ( 409,'Skręt kiszki (lewy)',  '2025-04-028T15:30:00', 301,    202);
+                    ( 409,'Skręt kiszki (lewy)',  '2025-04-028T15:30:00', 301,    202),
+                    ( 410,'Kontuzja nadgarstka',  '2025-03-028T15:45:00', 301,    204),
+                    ( 411,'Kontuzja nadgarstka',  '2025-04-028T15:45:00', 301,    204),
+                    ( 412,'Skręt kiszki (lewy)',  '2025-04-028T15:30:00', 301,    204);
 
 insert into medical_treatment(ID, DESCRIPTION, TYPE, VISIT_ID)
             values  (501, 'Badanie USG przed amputacja',          'USG',  401),
