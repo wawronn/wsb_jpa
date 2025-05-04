@@ -1,10 +1,10 @@
-insert into address (ID, ADDRESS_LINE1, ADDRESS_LINE2, CITY, POSTAL_CODE)
-            values  (101,'Wilczkow 34','','Sroda Slaska','55-300'),
-                    (102,'Wroclaw','Akacjowa 12/3','Wroclaw','53-133'),
-                    (103,'Lutynia','Akacjowa 12/3','Wroclaw','53-133'),
-                    (104,'Miekinia','Akacjowa 12/3','Wroclaw','53-133'),
-                    (105,'Gdynia','Akacjowa 12/3','Wroclaw','53-133'),
-                    (106,'Sopot','Molo 15','Sopot','51-132');
+insert into address (ID, ADDRESS_LINE1, ADDRESS_LINE2, CITY, POSTAL_CODE, VERSION)
+            values  (101,'Wilczkow 34','','Sroda Slaska','55-300', 1),
+                    (102,'Wroclaw','Akacjowa 12/3','Wroclaw','53-133', 1),
+                    (103,'Lutynia','Akacjowa 12/3','Wroclaw','53-133', 1),
+                    (104,'Miekinia','Akacjowa 12/3','Wroclaw','53-133', 1),
+                    (105,'Gdynia','Akacjowa 12/3','Wroclaw','53-133', 1),
+                    (106,'Sopot','Molo 15','Sopot','51-132', 1);
 
 insert into patient (ID, FIRST_NAME, LAST_NAME, TELEPHONE_NUMBER, EMAIL, PATIENT_NUMBER, DATE_OF_BIRTH, ADDRESS_ID)
             values (201,

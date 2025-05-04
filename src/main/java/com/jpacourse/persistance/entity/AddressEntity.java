@@ -12,7 +12,7 @@ public class AddressEntity {
 	private Long id;
 
 	@Version
-	private Integer version;
+	private Long version;
 
 	@Column(nullable = false)
 	private String city;
@@ -66,11 +66,11 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
-	public int getVersion() {
+	public Long getVersion() {
 		return version;
 	}
 
-	public void setVersion(int version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 
