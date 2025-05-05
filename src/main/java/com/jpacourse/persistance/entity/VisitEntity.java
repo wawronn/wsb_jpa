@@ -20,7 +20,7 @@ public class VisitEntity {
 	private LocalDateTime time;
 
 	// relacja jednostronna od strony dziecka
-	@ManyToOne( fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = true)
 	private DoctorEntity doctor;
 
@@ -83,4 +83,5 @@ public class VisitEntity {
 	public void setPatient(PatientEntity patient) { this.patient = patient; }
 
 	public Collection<MedicalTreatmentEntity> getTreatments() { return treatments; }
+
 }
