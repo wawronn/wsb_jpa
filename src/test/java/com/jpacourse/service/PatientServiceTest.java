@@ -3,7 +3,10 @@ package com.jpacourse.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.jpacourse.dto.PatientTO;
+import com.jpacourse.persistance.dao.DoctorDao;
 import com.jpacourse.persistance.dao.PatientDao;
+import com.jpacourse.persistance.dao.VisitDao;
+import com.jpacourse.persistance.entity.DoctorEntity;
 import com.jpacourse.persistance.entity.PatientEntity;
 import com.jpacourse.persistance.entity.VisitEntity;
 import com.jpacourse.testData.PatientTest;
@@ -13,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 public class PatientServiceTest {
@@ -22,26 +26,37 @@ public class PatientServiceTest {
     @Autowired
     private PatientDao patientDao;
 
-    @Transactional
+    @Autowired
+    private DoctorDao doctorDao;
+
+    @Autowired
+    private VisitDao visitDao;
+
     @Test
     public void testDeletePatient() {
 
-        PatientEntity patient = PatientTest.addPatient();
-        assertTrue(patient.getVisits().isEmpty());
+        Long patientId = 201L;
+        PatientEntity patient = patientDao.findOne(patientId);
 
-        VisitEntity visit1 = new VisitEntity();
-        visit1.setTime(LocalDateTime.now().plusDays(11));
-        VisitEntity visit2 = new VisitEntity();
-        visit2.setTime(LocalDateTime.now());
+        List<Long> visitIds = patient.getVisits().stream().
+                map(VisitEntity::getId)
+                .toList();
 
-        patient.getVisits().add(visit1);
-        patient.getVisits().add(visit2);
+        List<Long> doctorIds = patient.getVisits().stream().
+                map(visit -> visit.getDoctor().getId())
+                .toList();
 
-        patientDao.save(patient);
-        patientService.deleteById(patient.getId());
+        patientService.deleteById(patientId);
 
-        assertNull(patientDao.findOne(patient.getId()));
-        assertTrue(patient.getVisits().isEmpty());
+        for (Long doctorId : doctorIds) {
+            DoctorEntity doctor = doctorDao.findOne(doctorId);
+            assertEquals(doctor.getId(), doctorId);
+        }
+
+        for (Long visitId : visitIds) {
+            assertNull(visitDao.findOne(visitId));
+        }
+
     }
 
     @Test

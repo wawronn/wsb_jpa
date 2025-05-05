@@ -1,1 +1,1 @@
-tbd
+Projekt WSB_JPA
