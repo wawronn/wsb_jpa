@@ -2,10 +2,10 @@ package com.jpacourse.persistance.dao;
 
 import com.jpacourse.persistance.entity.AddressEntity;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.OptimisticLockException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -31,10 +31,10 @@ public class AddressDaoTest
     public void testShouldFindAddressById() {
         // given
         // when
-        AddressEntity addressEntity = addressDao.findOne(901L);
+        AddressEntity addressEntity = addressDao.findOne(101L);
         // then
         assertThat(addressEntity).isNotNull();
-        assertThat(addressEntity.getPostalCode()).isEqualTo("60-400");
+        assertThat(addressEntity.getPostalCode()).isEqualTo("55-300");
     }
 
     @Transactional
@@ -80,18 +80,32 @@ public class AddressDaoTest
         assertThat(removed).isNull();
     }
 
-    @Transactional
     @Test
-    public void testShouldFindDifferentVersion() {
-        AddressEntity adr1 = addressDao.findOne(101L);
-        AddressEntity adr2 = addressDao.findOne(101L);
+    public void testShouldThrowOptimisticLockException() {
+
+        Long id = 101L;
+
+        AddressEntity adr1 = addressDao.findOne(id);
+        AddressEntity adr2 = addressDao.findOne(id);
+
         adr1.setCity("Krynica Morska");
+        logVersionFromDb(id);
         addressDao.update(adr1);
+        logVersionFromDb(id);
+
         adr2.setCity("Jednak Miedzyzdroje");
-        // Try to update the same entity after it has been updated already
-        assertThrows(OptimisticLockException.class, () -> {
-            addressDao.update(adr2); // Should fail due to version conflict
+
+        assertThrows(ObjectOptimisticLockingFailureException.class, () -> {
+            addressDao.update(adr2);
         });
+    }
+
+    private void logVersionFromDb(Long id) {
+        Object version = em1
+                .createNativeQuery("SELECT version FROM address WHERE id = ?")
+                .setParameter(1, id)
+                .getSingleResult();
+        System.out.println("Wersja w bazie dla id=" + id + ": " + version);
     }
 
 }

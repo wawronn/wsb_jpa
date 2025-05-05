@@ -2,11 +2,7 @@ package com.jpacourse.persistance.dao;
 
 import com.jpacourse.persistance.entity.PatientEntity;
 import com.jpacourse.persistance.entity.VisitEntity;
-import com.jpacourse.service.PatientService;
-import com.jpacourse.service.PatientServiceTest;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +19,7 @@ public class patientQueryTest {
 
     @Autowired
     private PatientDao patientDao;
+
     @Autowired
     private LocalContainerEntityManagerFactoryBean entityManagerFactory2;
 
@@ -41,12 +38,12 @@ public class patientQueryTest {
     @Test
     void shouldReturnVisitsForPatientIdDao() {
         // test serwisu w com.jpacourse.service.PatientServiceTest
-        Long patientId = 203L;
+        Long patientId = 204L;
         List<VisitEntity> visits = patientDao.getVisitsByPatientId(patientId);
         for (VisitEntity visit : visits) {
             assertEquals(patientId, visit.getPatient().getId());
         }
-        assertEquals(2, visits.size());
+        assertEquals(3, visits.size());
     }
 
     @Test

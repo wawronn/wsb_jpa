@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements PatientDao {
+
     @Override
     public void addVisit(long patientId, long doctorId, LocalDateTime time, String description) throws IllegalArgumentException {
 
@@ -56,16 +57,6 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
                         " where size(patient.visits) > :param1 ", PatientEntity.class)
                     .setParameter("param1", numberOfVisits)
                     .getResultList();
-        /*
-        return entityManager.createQuery(
-                " select patient from PatientEntity patient " +
-                    " join patient.visits visit " +
-                    " group by patient " +
-                    " having count(visit) > :param1 ", PatientEntity.class)
-                .setParameter("param1", numberOfVisits)
-                .getResultList();
-
-         */
     }
 
     @Override
