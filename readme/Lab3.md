@@ -25,7 +25,7 @@ Nastepnie zmien adnotacje na
 @Fetch(FetchMode.JOIN)
 
 i powtorz test i obserwacje. Wnioski zapisz na dole tego pliku i skomituj.
-[Wnioski w pliku SELECT_vs_JOIN.md w katalogu readme]
+# Wnioski w pliku SELECT_vs_JOIN.md w katalogu readme
 
 Do wybranej encji dodaj wersjonowanie, oraz napisz test (w DAO) sprawdzajacy rownolegla modyfikacje (OptimisticLock)
-[testShouldThrowOptimisticLockException w AddressDaoTest.java]
+# testShouldThrowOptimisticLockException w AddressDaoTest.java
